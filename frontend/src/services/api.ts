@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { AuthResponse, LoginCredentials, RegisterCredentials } from '../models';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+// В продакшене на Vercel используем относительный URL
+const isProduction = process.env.NODE_ENV === 'production';
+const API_URL = isProduction ? '/api' : (process.env.REACT_APP_API_URL || 'http://localhost:5000/api');
 
 // Create an instance of axios with default config
 const api = axios.create({

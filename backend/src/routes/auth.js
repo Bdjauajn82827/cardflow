@@ -3,6 +3,7 @@ const { body, validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
 const { User, Workspace } = require('../database/models');
 const auth = require('../middleware/auth');
+const { logRegistrationError, logSuccessfulRegistration, logDatabaseAction } = require('../utils/logger');
 
 const router = express.Router();
 
@@ -45,12 +46,14 @@ router.post(
     const { email, password, name } = req.body;
 
     try {
+      logDatabaseAction('Finding existing user', { email });
       // Check if user already exists
       let existingUser = await User.findOne({ where: { email } });
       if (existingUser) {
         return res.status(400).json({ message: 'User already exists' });
       }
 
+      logDatabaseAction('Creating new user', { email, name });
       // Create new user
       const user = await User.create({
         email,
@@ -58,6 +61,7 @@ router.post(
         name,
       });
 
+      logDatabaseAction('Creating default workspace', { userId: user.id });
       // Create default workspace
       await Workspace.create({
         userId: user.id,
@@ -68,13 +72,26 @@ router.post(
       // Generate JWT
       const token = generateToken(user.id);
 
+      // Логируем успешную регистрацию
+      logSuccessfulRegistration(user);
+
       res.status(201).json({
         token,
         user,
       });
     } catch (err) {
-      console.error('Registration error:', err.message);
-      res.status(500).json({ message: 'Server error' });
+      // Расширенное логирование ошибки
+      logRegistrationError(err, { email, name });
+      
+      // Возвращаем более информативное сообщение об ошибке
+      res.status(500).json({ 
+        message: 'Server error during registration', 
+        error: process.env.NODE_ENV === 'production' ? 'See server logs' : err.message,
+        details: process.env.NODE_ENV !== 'production' ? {
+          name: err.name,
+          code: err.code
+        } : undefined
+      });
     }
   }
 );

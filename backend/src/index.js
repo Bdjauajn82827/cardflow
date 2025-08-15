@@ -66,7 +66,14 @@ if (process.env.NODE_ENV !== 'production') {
     });
 } else {
   // В продакшене не запускаем сервер, а просто экспортируем app для Vercel
-  console.log('Running in serverless mode for Vercel deployment');
+  // Но синхронизацию с базой данных всё равно делаем для корректной работы
+  db.sequelize.sync({ alter: false })
+    .then(() => {
+      console.log('Database synchronized in serverless mode');
+    })
+    .catch((err) => {
+      console.error('Failed to synchronize database in serverless mode:', err);
+    });
 }
 
 // Экспортируем приложение для Vercel serverless function

@@ -175,7 +175,12 @@ const Auth: React.FC = () => {
         dispatch(loginSuccess({ user: response.user }));
         navigate('/');
       } catch (error: any) {
-        dispatch(loginFailure(error.response?.data?.message || 'Login failed'));
+        const errorMessage = error.response?.data?.message || 
+                           error.response?.data?.error || 
+                           error.message || 
+                           'Login failed';
+        console.error('Login error:', error);
+        dispatch(loginFailure(errorMessage));
       }
     } else {
       try {
@@ -189,7 +194,25 @@ const Auth: React.FC = () => {
         dispatch(registerSuccess({ user: response.user }));
         navigate('/');
       } catch (error: any) {
-        dispatch(registerFailure(error.response?.data?.message || 'Registration failed'));
+        console.error('Registration error:', error);
+        let errorMessage = 'Registration failed';
+        
+        // Улучшенная обработка ошибок
+        if (error.response?.data) {
+          if (error.response.data.message) {
+            errorMessage = error.response.data.message;
+          }
+          if (error.response.data.error) {
+            errorMessage += `: ${error.response.data.error}`;
+          }
+          if (error.response.data.details) {
+            console.error('Error details:', error.response.data.details);
+          }
+        } else if (error.message) {
+          errorMessage = error.message;
+        }
+        
+        dispatch(registerFailure(errorMessage));
       }
     }
   };
