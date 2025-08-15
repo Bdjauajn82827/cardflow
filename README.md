@@ -55,11 +55,11 @@ npm run install-all
 PORT=5000
 DB_NAME=postgres
 DB_USER=postgres
-DB_PASSWORD=your_password
-DB_HOST=your_host.supabase.co
+DB_PASSWORD=IFEzoP0ppdwJ7d39
+DB_HOST=db.eskiyhqhittzpwoxfmvq.supabase.co
 DB_PORT=5432
-DATABASE_URL=postgresql://postgres:your_password@your_host.supabase.co:5432/postgres
-JWT_SECRET=your_jwt_secret_should_be_long_and_complex
+DATABASE_URL=postgresql://postgres:IFEzoP0ppdwJ7d39@db.eskiyhqhittzpwoxfmvq.supabase.co:5432/postgres
+JWT_SECRET=059713690b6fa1eba46f5c97d4307a6f9c0077c34329dd8bacd931513b67496a1d2ac56c72ff0e88b7cb77cc3928c9eee2c90dd5e5889bd7cdaf14dbca57bcde
 JWT_EXPIRES_IN=7d
 ```
 
@@ -83,7 +83,7 @@ npm run backend
 
 ## Деплой на Vercel
 
-Для деплоя приложения на Vercel с использованием базы данных Supabase следуйте инструкциям в файле [vercel_deployment_guide.md](/vercel_deployment_guide.md).
+Для деплоя приложения на Vercel с использованием базы данных Supabase следуйте инструкциям в файле [vercel_setup_instructions.md](/vercel_setup_instructions.md).
 
 ## Структура проекта
 
@@ -135,25 +135,34 @@ MIT
 ### 1. Клонирование репозитория
 
 ```bash
-git clone https://github.com/yourusername/cardflow.git
+git clone https://github.com/Bdjauajn82827/cardflow.git
 cd cardflow
 ```
 
 ### 2. Установка зависимостей
 
-#### Для бэкенда:
 ```bash
+# Для бэкенда:
 cd backend
 npm install
-```
 
-#### Для фронтенда:
-```bash
+# Для фронтенда:
 cd ../frontend
 npm install
 ```
 
-### 3. Настройка переменных окружения
+### 3. Настройка базы данных и переменных окружения
+
+#### 3.1. Запуск SQL-скрипта для инициализации базы данных
+
+Перед первым запуском необходимо создать структуру базы данных:
+
+1. Зайдите в панель управления Supabase
+2. Перейдите в раздел SQL Editor
+3. Создайте новый запрос и вставьте содержимое файла `database_schema.sql`
+4. Выполните скрипт
+
+#### 3.2. Настройка переменных окружения
 
 #### Бэкенд (.env файл в папке backend):
 ```
@@ -206,224 +215,22 @@ docker-compose up
 
 ## Деплой на продакшн
 
-### Вариант 1: Деплой на Heroku
+### Деплой на Vercel
 
-#### 1. Настройка репозитория для Heroku
+Проект настроен для деплоя на платформу Vercel с использованием базы данных Supabase. Для деплоя следуйте инструкциям в файле [vercel_setup_instructions.md](/vercel_setup_instructions.md).
 
-Создайте файл `package.json` в корневой директории:
+Основные шаги:
 
-```json
-{
-  "name": "cardflow",
-  "version": "1.0.0",
-  "description": "Система организации информации с помощью карточек",
-  "engines": {
-    "node": "14.x"
-  },
-  "scripts": {
-    "start": "cd backend && npm start",
-    "heroku-postbuild": "cd backend && npm install && cd ../frontend && npm install && npm run build"
-  }
-}
-```
+1. Форкните или клонируйте репозиторий на GitHub
+2. Подключите ваш репозиторий в Vercel
+3. Настройте переменные окружения в Vercel
+4. Запустите деплой
+5. Подключите ваш домен (если необходимо)
 
-Создайте файл `Procfile` в корневой директории:
-
-```
-web: cd backend && npm start
-```
-
-#### 2. Настройка Express для раздачи статических файлов
-
-В файле `backend/src/server.js` добавьте следующий код:
-
-```javascript
-// Serve static assets in production
-if (process.env.NODE_ENV === 'production') {
-  // Set static folder
-  app.use(express.static(path.join(__dirname, '../../frontend/build')));
-
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../../frontend/build', 'index.html'));
-  });
-}
-```
-
-#### 3. Создание приложения на Heroku и деплой
-
-```bash
-heroku create your-app-name
-git add .
-git commit -m "Ready for deployment"
-git push heroku master
-```
-
-#### 4. Настройка переменных окружения на Heroku
-
-```bash
-heroku config:set MONGODB_URI=your_mongodb_uri
-heroku config:set JWT_SECRET=your_jwt_secret
-heroku config:set JWT_EXPIRES_IN=7d
-heroku config:set NODE_ENV=production
-```
-
-### Вариант 2: Деплой с использованием Docker
-
-#### 1. Предварительные требования
-
-- Docker и Docker Compose установлены на вашем сервере
-- Git для клонирования репозитория
-
-#### 2. Клонирование репозитория
-
-```bash
-git clone https://github.com/yourusername/cardflow.git
-cd cardflow
-```
-
-#### 3. Настройка переменных окружения
-
-Создайте файл `.env` в корневой директории:
-
-```
-JWT_SECRET=your_jwt_secret_should_be_long_and_complex
-JWT_EXPIRES_IN=7d
-```
-
-#### 4. Запуск с помощью Docker Compose
-
-```bash
-docker-compose up -d
-```
-
-Приложение будет доступно по адресу [http://localhost](http://localhost).
-
-#### 5. Проверка логов
-
-```bash
-# Логи MongoDB
-docker logs cardflow-mongodb
-
-# Логи бэкенда
-docker logs cardflow-backend
-
-# Логи фронтенда
-docker logs cardflow-frontend
-```
-
-#### 6. Остановка контейнеров
-
-```bash
-docker-compose down
-```
-
-### Вариант 3: Деплой на VPS (Ubuntu)
-
-#### 1. Настройка сервера
-
-```bash
-# Обновление пакетов
-sudo apt update
-sudo apt upgrade
-
-# Установка Node.js
-curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-sudo apt install -y nodejs
-
-# Установка MongoDB
-sudo apt install -y mongodb
-sudo systemctl start mongodb
-sudo systemctl enable mongodb
-
-# Установка Nginx
-sudo apt install -y nginx
-sudo systemctl start nginx
-sudo systemctl enable nginx
-
-# Установка PM2 для управления процессами
-sudo npm install -g pm2
-```
-
-#### 2. Клонирование репозитория
-
-```bash
-git clone https://github.com/yourusername/cardflow.git
-cd cardflow
-```
-
-#### 3. Настройка и сборка приложения
-
-```bash
-# Установка зависимостей бэкенда
-cd backend
-npm install
-
-# Создание .env файла
-echo "PORT=5000
-MONGODB_URI=mongodb://localhost:27017/cardflow
-JWT_SECRET=your_jwt_secret_should_be_long_and_complex
-JWT_EXPIRES_IN=7d
-NODE_ENV=production" > .env
-
-# Установка зависимостей и сборка фронтенда
-cd ../frontend
-npm install
-npm run build
-```
-
-#### 4. Настройка Nginx
-
-Создайте файл конфигурации:
-
-```bash
-sudo nano /etc/nginx/sites-available/cardflow
-```
-
-Добавьте следующую конфигурацию:
-
-```nginx
-server {
-    listen 80;
-    server_name your-domain.com www.your-domain.com;
-
-    location / {
-        root /path/to/cardflow/frontend/build;
-        try_files $uri /index.html;
-    }
-
-    location /api {
-        proxy_pass http://localhost:5000;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host $host;
-        proxy_cache_bypass $http_upgrade;
-    }
-}
-```
-
-Активируйте конфигурацию:
-
-```bash
-sudo ln -s /etc/nginx/sites-available/cardflow /etc/nginx/sites-enabled/
-sudo systemctl restart nginx
-```
-
-#### 5. Запуск приложения с PM2
-
-```bash
-cd /path/to/cardflow/backend
-pm2 start src/server.js --name "cardflow-backend"
-pm2 save
-pm2 startup
-```
-
-#### 6. Настройка SSL с Certbot (опционально)
-
-```bash
-sudo apt install -y certbot python3-certbot-nginx
-sudo certbot --nginx -d your-domain.com -d www.your-domain.com
-```
+Переменные окружения Vercel:
+- DATABASE_URL: строка подключения к Supabase
+- JWT_SECRET: секретный ключ JWT
+- NODE_ENV: production
 
 ## Структура проекта
 
