@@ -1,0 +1,145 @@
+/* Стили для TinyMCE */
+.tox .tox-toolbar__group {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+/* Убираем черный фон у кнопок */
+.tox .tox-tbtn {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.tox .tox-tbtn svg {
+  fill: currentColor !important;
+}
+
+.tox .tox-tbtn:hover {
+  background-color: rgba(63, 81, 181, 0.1) !important;
+}
+
+.tox .tox-tbtn--enabled, 
+.tox .tox-tbtn--enabled:hover {
+  background-color: rgba(63, 81, 181, 0.2) !important;
+}
+
+/* Прозрачные элементы интерфейса */
+.tox .tox-collection__item {
+  background-color: transparent !important;
+}
+
+.tox .tox-mbtn {
+  background-color: transparent !important;
+  color: inherit !important;
+}
+
+.tox .tox-collection--toolbar .tox-collection__item--active {
+  background-color: rgba(63, 81, 181, 0.2) !important;
+}
+
+/* Настройка выпадающих меню и подсказок */
+.tox .tox-menu {
+  background-color: #fff !important;
+  border: 1px solid #E0E0E0 !important;
+  border-radius: 4px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.tox .tox-collection--list .tox-collection__item--enabled {
+  background-color: #E8EAF6 !important;
+}
+
+.tox .tox-collection--list .tox-collection__item--active {
+  background-color: #F5F5F5 !important;
+}
+
+/* Настройка для темного режима */
+.tox.tox-tinymce-dark {
+  border-color: #333 !important;
+}
+
+.tox.tox-tinymce-dark .tox-toolbar__primary {
+  background-color: #1E1E1E !important;
+  border-color: #333 !important;
+}
+
+.tox.tox-tinymce-dark .tox-tbtn {
+  color: #FFF !important;
+}
+
+.tox.tox-tinymce-dark .tox-tbtn svg {
+  fill: #FFF !important;
+}
+
+.tox.tox-tinymce-dark .tox-tbtn:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.tox.tox-tinymce-dark .tox-tbtn--enabled, 
+.tox.tox-tinymce-dark .tox-tbtn--enabled:hover {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Настройки для кнопок форматирования текста */
+.tox .tox-toolbar__group button {
+  background-color: transparent !important;
+}
+
+/* Отключение ненужных рамок */
+.tox:not(.tox-tinymce-inline) .tox-editor-header {
+  box-shadow: none !important;
+}
+
+/* Исправление черного фона у кнопок */
+.tox .tox-toolbar, 
+.tox .tox-toolbar__overflow, 
+.tox .tox-toolbar__primary {
+  background: transparent !important;
+}
+
+.tox .tox-toolbar-overlord {
+  background-color: transparent !important;
+}
+
+.tox:not([dir=rtl]) .tox-toolbar__group:not(:last-of-type) {
+  border-right: none !important;
+}
+
+/* Делаем редактор соответствующим теме приложения */
+.tox .tox-edit-area__iframe {
+  background-color: inherit !important;
+}
+
+/* Кнопки форматирования */
+.tox .tox-split-button {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.tox .tox-split-button__chevron {
+  background-color: transparent !important;
+}
+
+.tox .tox-tbtn--select {
+  background-color: transparent !important;
+}
+
+/* Для других кнопок с выпадающим меню */
+.tox .tox-tbtn.tox-tbtn--select {
+  background-color: transparent !important;
+}
+
+/* Выпадающие списки */
+.tox .tox-listboxfield .tox-listbox--select, 
+.tox .tox-textarea, 
+.tox .tox-textfield, 
+.tox .tox-toolbar-textfield {
+  background-color: transparent !important;
+  border-color: rgba(63, 81, 181, 0.2) !important;
+}
+
+/* Устранение неприятных эффектов при фокусе */
+.tox .tox-tbtn:focus:not(.tox-tbtn--disabled) {
+  background: rgba(63, 81, 181, 0.1) !important;
+}

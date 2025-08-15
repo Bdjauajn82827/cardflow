@@ -1,0 +1,138 @@
+/* Эти стили добавляются в ваш глобальный CSS или в файл стилей проекта */
+
+/* Стили для редактора Draft.js */
+.editor-button {
+  background-color: transparent;
+  border: 1px solid #E0E0E0;
+  color: #757575;
+  border-radius: 4px;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.editor-button:hover {
+  background-color: #F5F5F5;
+  border-color: #BDBDBD;
+}
+
+.editor-button.rdw-option-active {
+  background-color: #E8EAF6;
+  border-color: #3F51B5;
+  color: #3F51B5;
+}
+
+.editor-dropdown {
+  border: 1px solid #E0E0E0;
+  border-radius: 4px;
+  color: #757575;
+  transition: all 0.2s ease;
+}
+
+.editor-dropdown:hover {
+  border-color: #BDBDBD;
+}
+
+.editor-color-picker {
+  border: 1px solid #E0E0E0;
+  border-radius: 4px;
+}
+
+.rdw-editor-toolbar {
+  padding: 10px !important;
+  border: 1px solid #E0E0E0 !important;
+  border-radius: 8px 8px 0 0 !important;
+  background-color: #F9F9F9 !important;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.rdw-editor-main {
+  border: 1px solid #E0E0E0 !important;
+  border-top: none !important;
+  padding: 16px !important;
+  min-height: 250px !important;
+  font-family: 'Roboto', sans-serif !important;
+  font-size: 14px !important;
+  line-height: 1.6 !important;
+}
+
+.rdw-option-wrapper {
+  height: 30px !important;
+  width: 30px !important;
+  border-radius: 4px !important;
+  margin: 0 3px !important;
+  border: 1px solid #E0E0E0 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.rdw-option-wrapper:hover {
+  box-shadow: none !important;
+  background-color: #F5F5F5 !important;
+}
+
+.rdw-option-active {
+  background-color: #E8EAF6 !important;
+  border-color: #3F51B5 !important;
+  box-shadow: none !important;
+}
+
+.rdw-dropdown-wrapper {
+  height: 30px !important;
+  border-radius: 4px !important;
+  border: 1px solid #E0E0E0 !important;
+}
+
+.rdw-dropdown-optionwrapper {
+  border-radius: 4px !important;
+  border: 1px solid #E0E0E0 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.rdw-dropdownoption-default {
+  padding: 6px 15px !important;
+}
+
+.rdw-colorpicker-modal {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  border-radius: 4px !important;
+}
+
+.rdw-link-modal {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  border-radius: 4px !important;
+}
+
+.rdw-emoji-modal {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  border-radius: 4px !important;
+}
+
+.rdw-embedded-modal {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  border-radius: 4px !important;
+}
+
+.rdw-link-modal-btn, .rdw-embedded-modal-btn {
+  background-color: #3F51B5 !important;
+  color: white !important;
+  border-radius: 4px !important;
+  padding: 6px 12px !important;
+}
+
+.rdw-link-modal-input, .rdw-embedded-modal-input {
+  border-radius: 4px !important;
+  border: 1px solid #E0E0E0 !important;
+  padding: 8px !important;
+  font-family: 'Roboto', sans-serif !important;
+  margin-bottom: 10px !important;
+}
+
+.public-DraftEditor-content {
+  min-height: 200px !important;
+}

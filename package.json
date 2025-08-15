@@ -1,0 +1,26 @@
+{
+  "name": "cardflow-dev",
+  "version": "1.0.0",
+  "description": "Development script for CardFlow",
+  "scripts": {
+    "frontend": "cd frontend && npm start",
+    "backend": "cd backend && npm run dev",
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
+    "install-all": "npm install && (cd backend && npm install) && (cd frontend && npm install)",
+    "build": "cd frontend && npm run build",
+    "start": "cd backend && npm start"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  },
+  "dependencies": {
+    "@types/draft-js": "^0.11.18",
+    "@types/react-draft-wysiwyg": "^1.13.8",
+    "draft-js": "^0.11.7",
+    "draft-js-export-html": "^1.4.1",
+    "react-draft-wysiwyg": "^1.15.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

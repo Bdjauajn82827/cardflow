@@ -1,0 +1,57 @@
+version: '3'
+
+services:
+  # MongoDB service
+  mongodb:
+    image: mongo:4.4
+    container_name: cardflow-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - cardflow-network
+    restart: unless-stopped
+
+  # Backend service
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: cardflow-backend
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongodb
+    environment:
+      - NODE_ENV=production
+      - PORT=5000
+      - MONGODB_URI=mongodb://mongodb:27017/cardflow
+      - JWT_SECRET=${JWT_SECRET:-your_jwt_secret_should_be_long_and_complex}
+      - JWT_EXPIRES_IN=${JWT_EXPIRES_IN:-7d}
+    networks:
+      - cardflow-network
+    restart: unless-stopped
+
+  # Frontend service
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: cardflow-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - cardflow-network
+    restart: unless-stopped
+
+# Networks
+networks:
+  cardflow-network:
+    driver: bridge
+
+# Volumes
+volumes:
+  mongodb_data:
