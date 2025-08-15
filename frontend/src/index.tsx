@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import App from './App';
 import { store, RootState } from './store';
 import { GlobalStyles } from './styles/GlobalStyles';
-import { lightTheme, darkTheme, ThemeType } from './styles/theme';
+import { lightTheme, darkTheme } from './styles/theme';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

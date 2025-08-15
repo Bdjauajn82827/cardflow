@@ -29,7 +29,7 @@ const ContentArea = styled.div`
 
 const Main: React.FC = () => {
   const dispatch = useDispatch();
-  const { workspaces, activeWorkspaceId, loading: workspacesLoading } = useSelector((state: RootState) => state.workspace);
+  const { workspaces, activeWorkspaceId } = useSelector((state: RootState) => state.workspace);
   const { cards, activeCard, loading: cardsLoading } = useSelector((state: RootState) => state.card);
   const [isCardModalOpen, setIsCardModalOpen] = useState(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);

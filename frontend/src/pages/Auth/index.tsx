@@ -90,29 +90,6 @@ const ErrorText = styled.div`
   margin-left: 5px;
 `;
 
-const CheckboxContainer = styled.div`
-  display: flex;
-  align-items: center;
-  margin-top: 16px;
-`;
-
-const StyledCheckbox = styled(Field)`
-  margin-right: 8px;
-  width: 18px;
-  height: 18px;
-  cursor: pointer;
-  
-  &:checked {
-    accent-color: ${({ theme }) => theme.primary};
-  }
-`;
-
-const CheckboxLabel = styled.label`
-  font-size: 14px;
-  color: ${({ theme }) => theme.text};
-  cursor: pointer;
-`;
-
 const SubmitButton = styled.button`
   width: 100%;
   height: 48px;
